@@ -35,7 +35,8 @@
     <div class="columns">
       <div class="column is-8">
         <%= excuse.description %> - <% if (excuse.student){%> <%=
-        excuse.student.fullName() %> <% }%>
+        excuse.student.fullName() %> in <% if (excuse.student.cohort){%> <%=
+        excuse.student.cohort.course %> <% }%> <% }%>
       </div>
       <div class="column is-4">
         <%= excuse.location %> <a href="/excuse/<%= excuse._id %>">find lor</a>

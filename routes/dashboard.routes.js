@@ -1,12 +1,20 @@
 const router = require("express").Router();
-const { Student } = require("../models/student.models");
+const Student = require("../models/student.models");
 const Excuse = require("../models/excuse.models");
 
 router.get("/", async (req, res) => {
   try {
-    let excuses = await Excuse.find().populate("student");
+    let excuses = await Excuse.find().populate({
+      path: "student",
+      model: Student,
+      // select: "firstname student_num",
+      populate: {
+        path: "cohort",
+        select: "course",
+      },
+    });
     let students = await Student.find();
-    // console.log(excuses);
+    console.log(excuses);
     res.render("dashboard/index", { students, excuses });
   } catch (error) {
     console.log(error);

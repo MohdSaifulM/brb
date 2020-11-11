@@ -1,6 +1,6 @@
 require("dotenv").config();
 require("../lib/connection");
-const { Student } = require("../models/models");
+const Student = require("../models/models");
 
 Student.insertMany([
   {
