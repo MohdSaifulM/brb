@@ -10,7 +10,17 @@ const studentSchema = new Schema({
   firstname: { type: String, required: true },
   lastname: { type: String, required: true },
   cohort: courseSchema,
+  excuses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Excuse",
+    },
+  ],
 });
+
+studentSchema.methods.fullName = function () {
+  return this.firstname + " " + this.lastname;
+};
 
 const Student = mongoose.model("Student", studentSchema);
 const Course = mongoose.model("Course", courseSchema);
