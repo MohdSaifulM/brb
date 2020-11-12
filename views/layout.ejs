@@ -16,6 +16,15 @@
     </style>
   </head>
   <body>
+    <% if(alerts.success) {%> <% alerts.success.forEach(msg => { %>
+    <div class="notification is-primary mb-0"><%= msg %></div>
+    <% })%> <% } %> <% if(alerts.error) {%> <% alerts.error.forEach(msg => { %>
+    <div class="notification is-danger mb-0"><%= msg %></div>
+    <% })%> <% } %> <% if(alerts.warning) {%> <% alerts.warning.forEach(msg => {
+    %>
+    <div class="notification is-warning mb-0"><%= msg %></div>
+    <% })%> <% } %>
+
     <div class="is-flex">
       <div class="sidebar has-background-black p-3">
         <nav>
@@ -26,6 +35,8 @@
             <hr />
             <li><a href="/students">Course</a></li>
             <li><a href="/students/new">Add Course</a></li>
+            <hr />
+            <li><a href="/auth/logout">Logout</a></li>
           </ul>
         </nav>
       </div>

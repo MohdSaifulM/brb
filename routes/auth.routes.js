@@ -4,6 +4,12 @@ const Student = require("../models/student.models");
 // const bcrypt = require("bcrypt");
 // const saltRounds = 10;
 
+router.get("/logout", (req, res) => {
+  req.logOut();
+  req.flash("success", "Sad to see you go!");
+  res.redirect("/auth/login");
+});
+
 router.get("/register", (req, res) => {
   res.render("auth/register");
 });
@@ -34,20 +40,35 @@ router.post("/register", async (req, res) => {
 
   //   res.render("auth/register");
 });
-
-// router.post(
-//   "/login",
-//   passport.authenticate("local", { failureRedirect: "/auth/login" }),
-//   (req, res) => {
-//     res.redirect("/");
-//   }
-// );
+//default login
 router.post(
   "/login",
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/auth/login",
-    failureFlash: true,
+    successFlash: "Welcome to BRB",
+    failureFlash: "Wrong details",
+    // failureFlash: true,
   })
 );
+
+//custom login and redirect
+// router.post("login", (req, res) => {
+//   passport.authenticate("local", function (err, user, info) {
+//     if (err) {
+//       return next(err);
+//     }
+//     if (!user) {
+//       return res.redirect("/login?info=" + info);
+//     }
+//     req.logIn(user, function (err) {
+//       if (err) {
+//         return next(err);
+//       }
+
+//       return res.redirect("/");
+//     });
+//   })(req, res);
+// });
+
 module.exports = router;

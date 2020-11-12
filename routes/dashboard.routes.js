@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const Student = require("../models/student.models");
 const Excuse = require("../models/excuse.models");
+const usercheck = require("../lib/usercheck");
 
-router.get("/", async (req, res) => {
+router.get("/", usercheck, async (req, res) => {
   try {
     console.log(req.user);
     let excuses = await Excuse.find().populate({
@@ -56,6 +57,7 @@ router.post("/", async (req, res) => {
     student.excuses.push(excuse._id);
     await student.save();
 
+    req.flash("success", "Excuse added!"); //display flash message
     res.redirect("/dashboard");
   } catch (error) {
     console.log(error);
