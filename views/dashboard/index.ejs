@@ -46,6 +46,4 @@
   <% }) %>
 </div>
 
-<% ex.forEach(e => {%>
-<code> <%= e %> </code>
-<% }) %>
+<div>Auth user: <% if(currentUser) {%> <%= currentUser.firstname %> <%}%></div>

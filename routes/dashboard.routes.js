@@ -4,6 +4,7 @@ const Excuse = require("../models/excuse.models");
 
 router.get("/", async (req, res) => {
   try {
+    console.log(req.user);
     let excuses = await Excuse.find().populate({
       path: "student",
       model: Student,

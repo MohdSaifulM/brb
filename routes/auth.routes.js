@@ -35,11 +35,19 @@ router.post("/register", async (req, res) => {
   //   res.render("auth/register");
 });
 
+// router.post(
+//   "/login",
+//   passport.authenticate("local", { failureRedirect: "/auth/login" }),
+//   (req, res) => {
+//     res.redirect("/");
+//   }
+// );
 router.post(
   "/login",
-  passport.authenticate("local", { failureRedirect: "/auth/login" }),
-  (req, res) => {
-    res.redirect("/");
-  }
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/auth/login",
+    failureFlash: true,
+  })
 );
 module.exports = router;
