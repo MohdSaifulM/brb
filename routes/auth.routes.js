@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Student = require("../models/student.models");
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
+// const bcrypt = require("bcrypt");
+// const saltRounds = 10;
 
 router.get("/register", (req, res) => {
   res.render("auth/register");
@@ -30,11 +30,11 @@ router.post("/register", async (req, res) => {
   //   res.render("auth/register");
 });
 
-router.post(
-  "/login",
-  passport.authenticate("local", { failureRedirect: "/auth/login" }),
-  function (req, res) {
-    res.redirect("/");
-  }
-);
+// router.post(
+//   "/login",
+//   passport.authenticate("local", { failureRedirect: "/auth/login" }),
+//   function (req, res) {
+//     res.redirect("/");
+//   }
+// );
 module.exports = router;
