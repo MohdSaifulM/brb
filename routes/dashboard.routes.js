@@ -13,9 +13,26 @@ router.get("/", async (req, res) => {
         select: "course",
       },
     });
+
+    let ex = await Excuse.aggregate([
+      {
+        $group: {
+          // _id: "$createdAt",
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          allexcuses: {
+            $push: {
+              location: "$location",
+              description: "$description",
+              _id: "$_id",
+              student: "$student",
+            },
+          },
+        },
+      },
+    ]);
     let students = await Student.find();
-    console.log(excuses);
-    res.render("dashboard/index", { students, excuses });
+    // console.log(JSON.stringify(ex[1]));
+    res.render("dashboard/index", { students, excuses, ex });
   } catch (error) {
     console.log(error);
     console.log("nothing");

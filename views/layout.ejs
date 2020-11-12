@@ -5,8 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/bulma.min.css" />
     <title>Document</title>
+    <style>
+      .sidebar {
+        width: 300px;
+        height: 100vh;
+      }
+      .content {
+        width: calc(100vw - 300px);
+      }
+    </style>
   </head>
   <body>
-    <%- body %>
+    <div class="is-flex">
+      <div class="sidebar has-background-black p-3">
+        <nav>
+          <ul class="has-text-white">
+            <li><a href="/">Home</a></li>
+            <li><a href="/students">Students</a></li>
+            <li><a href="/students/new">Add Students</a></li>
+            <hr />
+            <li><a href="/students">Course</a></li>
+            <li><a href="/students/new">Add Course</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="content"><%- body %></div>
+    </div>
   </body>
 </html>
