@@ -12,13 +12,13 @@ router.post("/register", async (req, res) => {
   try {
     let { firstname, lastname, email, password } = req.body;
 
-    let passwordHash = await bcrypt.hash(password, saltRounds);
+    // let passwordHash = await bcrypt.hash(password, saltRounds);
 
     let student = new Student({
       firstname,
       lastname,
       email,
-      password: passwordHash,
+      password, //: passwordHash,
     });
 
     await student.save();
