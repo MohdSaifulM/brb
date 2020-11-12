@@ -1,10 +1,15 @@
 const router = require("express").Router();
+const passport = require("../lib/passportConfig");
 const Student = require("../models/student.models");
 // const bcrypt = require("bcrypt");
 // const saltRounds = 10;
 
 router.get("/register", (req, res) => {
   res.render("auth/register");
+});
+
+router.get("/login", (req, res) => {
+  res.render("auth/login");
 });
 
 router.post("/register", async (req, res) => {
@@ -30,11 +35,11 @@ router.post("/register", async (req, res) => {
   //   res.render("auth/register");
 });
 
-// router.post(
-//   "/login",
-//   passport.authenticate("local", { failureRedirect: "/auth/login" }),
-//   function (req, res) {
-//     res.redirect("/");
-//   }
-// );
+router.post(
+  "/login",
+  passport.authenticate("local", { failureRedirect: "/auth/login" }),
+  (req, res) => {
+    res.redirect("/");
+  }
+);
 module.exports = router;
