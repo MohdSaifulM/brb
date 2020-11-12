@@ -30,4 +30,11 @@ router.post("/register", async (req, res) => {
   //   res.render("auth/register");
 });
 
+router.post(
+  "/login",
+  passport.authenticate("local", { failureRedirect: "/auth/login" }),
+  function (req, res) {
+    res.redirect("/");
+  }
+);
 module.exports = router;
